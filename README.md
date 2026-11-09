@@ -14,6 +14,19 @@ API would cost thousands of dollars, so the API labels a sample, a local
 model learns from it, and only articles the local model is unsure about go
 back to the API, under a budget cap.
 
+## Data
+
+The results of the run on archive.usenet.blueworldhosting.com (2026-11-09)
+are public under CC0: the current list (35.8M Message-IDs) and a core list
+(27.5M, flagged by the last three passes), each also as an INN history
+file, the lists of all six passes, the 14.8M labels, the spot checks, the
+NoCeM listings, the local models and the whole SQLite database, as 7z
+files (about 12 GB). README.txt there describes every file.
+
+- https://archive.org/details/usenet-spamclassifier-bwh-2026-11-09
+  (archive.org also offers it as a torrent)
+- mirror: https://mbox-mo1.pugleaf.net/usenet-spamclassifier-data/
+
 ## Build
 
 ```
