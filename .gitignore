@@ -1,0 +1,11 @@
+/spamfilter
+/spamfilter-*
+*.db
+*.db-wal
+*.db-shm
+*.model
+*.history
+*.unsure/
+*.bi/
+*.batches/
+*.7z
