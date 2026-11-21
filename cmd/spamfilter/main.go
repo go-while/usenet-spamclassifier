@@ -102,6 +102,10 @@ func main() {
 		err = labelUnsure(args)
 	case "audit":
 		err = audit(args)
+	case "audit-openai":
+		err = auditOpenAI(args)
+	case "xcheck":
+		err = xcheck(args)
 	case "rescore":
 		err = rescore(args)
 	case "nntp-bench":
@@ -138,6 +142,8 @@ func usage() {
   label-unsure -db FILE -server HOST:PORT        label those candidates with their bodies (most copied first, then a spread)
   rescore     -db FILE -model-file MODEL          how a model decides the candidates (after train)
   audit       -db FILE -server HOST:PORT         spot-check flagged and clean articles with the model API
+  audit-openai -db FILE -server HOST:PORT        spot-check the scan with an OpenAI model (results in -out, the scan's database is only read)
+  xcheck      -db FILE -server HOST:PORT         a Claude model labels again what audit-openai checked in chosen hierarchies
   label-flagged -db FILE -server HOST:PORT -class bi   label one copy of each flagged key (the next scan uses the labels)
   compare     -before FILE -after FILE           compare two scans, measured on the spot checks
   recheck     -db FILE -server HOST:PORT        label spot-checked articles again (not stored) and compare with the spot check

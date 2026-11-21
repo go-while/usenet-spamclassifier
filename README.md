@@ -16,22 +16,27 @@ back to the API, under a budget cap.
 
 ## Data
 
-The results of the run on archive.usenet.blueworldhosting.com (2026-11-09)
-are public under CC0: the current list (35.8M Message-IDs) and a core list
-(27.5M, flagged by the last three passes), each also as an INN history
-file, the lists of all six passes, the 14.8M labels, the spot checks, the
-NoCeM listings, the local models and the whole SQLite database, as 7z
-files (about 12 GB). README.txt there describes every file.
+The results of the run on archive.usenet.blueworldhosting.com are public
+under CC0, as 7z files (about 12 GB each). README.txt in each item describes
+every file; archive.org also offers each item as a torrent.
 
-- https://archive.org/details/usenet-spamclassifier-bwh-2026-11-09
-  (archive.org also offers it as a torrent)
-- mirror: https://mbox-mo1.pugleaf.net/usenet-spamclassifier-data/
+- 2026-11-21, round 4e (current):
+  https://archive.org/details/usenet-spamclassifier-bwh-2026-11-21
+  (mirror: https://mbox-mo1.pugleaf.net/usenet-spamclassifier-data-2026-11-21/).
+  The current list (35.7M Message-IDs) and a core list (flagged by each of
+  the last four passes), each also as an INN history file, the lists of all
+  seven passes, the 14.8M labels, the spot checks, the cross-checks with
+  gpt-6-luna and Claude Haiku, the NoCeM listings, the local models and the
+  whole SQLite database.
+- 2026-11-09, round 4d:
+  https://archive.org/details/usenet-spamclassifier-bwh-2026-11-09
+  (mirror: https://mbox-mo1.pugleaf.net/usenet-spamclassifier-data/).
 
 ## Build
 
 ```
-go build -o spamfilter ./cmd/spamfilter
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o spamfilter-linux-amd64 ./cmd/spamfilter
+go build -o bin/spamfilter ./cmd/spamfilter
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o bin/spamfilter-linux-amd64 ./cmd/spamfilter
 ```
 
 Go 1.27.3 or later. Dependencies: the Anthropic Go SDK, `modernc.org/sqlite`
@@ -353,6 +358,62 @@ the first-pass flags still flagged rose from 21.2M (0.5M ham) to 24.3M
 (0.7M ham); none of the 2,949 clean-sample ham became flagged. Not
 spot-checked yet (API budget at $378 of $380); estimated about 33.7M spam
 and 1.6M ham.
+
+### Cross-check with another model family (2026-11-20)
+
+`audit-openai` sends a random sample to an OpenAI model (here gpt-6-luna,
+reasoning effort low) through the Responses API, with the same prompt,
+article format and answer letters as the Claude labels. Articles are
+fetched by Message-ID. Results and spend go to their own database (`-out`):
+the scan's audit table holds keys out of training, so it stays as it is.
+The `calib` class re-checks articles Claude already spot-checked: Luna calls
+84.4% of Claude's spam spam, and 5.1% of Claude's ham and unsure. The report
+converts each class's Luna spam share to Claude's scale with these two
+rates (Rogan-Gladen). The not-flagged sample is random articles of the
+archive (a group weighted by size, a random number, one home copy).
+
+```sh
+spamfilter audit-openai -db spamfilter.db -out spamfilter-openai.db -server HOST:119 \
+  -plan model=200000,llm=40000,nocem=40000,bi=40000,subj=20000,unflagged=60000,calib=40000 -budget 30
+```
+
+440,000 checks, $12.84, 2h04m:
+
+| flagged by | checked | Luna: spam | ham | unsure | on Claude's scale |
+|---|---|---|---|---|---|
+| model | 200,000 | 84.6% | 10.8% | 4.6% | ~100% |
+| llm | 40,000 | 76.6% | 21.1% | 2.3% | 90.2% |
+| nocem | 40,000 | 88.2% | 11.0% | 0.8% | ~100% |
+| bi | 40,000 | 89.5% | 8.3% | 2.2% | ~100% |
+| subj | 20,000 | 97.2% | 2.8% | 0.0% | ~100% |
+
+Of 62,411 random articles 3.8% were flagged. Of the rest, those the model
+called ham (95%) hold no more spam than Luna's own error rate; the
+undecided (1.7%) are about 44% spam.
+
+Where Luna and the scan disagreed most, `xcheck` had Claude Haiku label the
+same articles again: 19,545 in relcom, biz, de, nl, fr, it, pl, uk and free,
+$0.60. The labels are not stored; the spend is added to the scan's database.
+Haiku sides with the scan in relcom (87-89% spam, Luna 35-50%) and biz
+(90-97%, Luna 50-66%): Luna is weak there. Both agree on the scan's weak
+spots: the model in free.* (about 40% spam, the rest mostly empty or
+garbled), the model in uk, de, pl and fr (65-73%), and NoCeM in de.*, nl.*
+and fr.*.
+
+```sh
+spamfilter xcheck -db spamfilter.db -out spamfilter-openai.db -server HOST:119 -per 3000 -budget 381
+```
+
+Round 4e ignores the NoCeM listings of four issuers in one hierarchy each
+(`run -nocem-skip-in`, default `DefaultNocemSkipIn`): nocem@eternal-september.org,
+nocem@arcor.de and mm+nocem@dorfdsl.de in de.*, Adri Verhoef's nl-cancel in
+nl.*. In Haiku's sample of their listings there, 31 of 536, 81 of 195, 2 of
+29 and 27 of 175 were spam. eternal-september's listings elsewhere held up.
+Same model and flags as round 4d otherwise (snapshot of after4d:
+spamfilter-after4d-2026-11-20.db). NoCeM flags in de.* fell from 139k to
+55k, in nl.* from 39.5k to 19.9k; the model flags about 15k of the freed
+articles itself. 35,718,617 flags in all (after4d: 35,802,565), 3h20m. API
+spend $378.62.
 
 ## Web view
 

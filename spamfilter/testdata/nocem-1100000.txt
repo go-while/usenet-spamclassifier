@@ -1,0 +1,36 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+You may use this for hiding articles using NoCeM mechanism.
+The above list is provided without any warranty. Use it at your own risks!
+
+For more information, see http://home.httrack.net/~nocem/
+
+This message was signed using the following key:
+Key ID 0x11041128 ; C30E 65D8 94A6 4DE8 8882  21F3 44E9 A2A6 1104 1128
+
+
+@@BEGIN NCM HEADERS
+Version: 0.93
+Issuer: bleachbot@httrack.com
+Type: spam
+Action: hide
+Count: 1
+Notice-ID: 89e13e2817c00757
+@@BEGIN NCM BODY
+#	Sender: Hot Hot <magguru.appalakonda@gmail.com>
+#	Date: Tue, 23 Nov 2010 16:35:21 -0800 (PST)
+#	Subject: See Susmitha dating secrets Sex Videos
+#	Path: ...!ircam.fr!usenet-fr.net!de-l.enfer-du-nord.net!feeder2.enfer-du-nord.net!news.glorb.com!news2.glorb.com!postnews.google.com!i10g2000prd.googlegroups.com!not-for-mail
+<7cc7a075-790e-4f00-bfd4-c7e786da4d53@i10g2000prd.googlegroups.com>	rec.aviation.military
+@@END NCM BODY
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEARECAAYFAkzsXcoACgkQROmiphEEESg0IwCcCCOHvc08PiGIQVjAkZ6xNmbA
+qKYAnjnlJHHMd34vNm+FgB3d1dpVpKBR
+=Isyi
+-----END PGP SIGNATURE-----
+
+

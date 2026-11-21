@@ -1,0 +1,53 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+[Followup-To: news.admin.net-abuse.usenet]
+
+This is a notice for a spam detected by a spamAssassin script.
+The message referenced after NCM BODY is probably a spam. 
+
+This message was signed using the following key:
+8A90 C13A E047 AC73 06BB  2E47 21ED E4D6 D445 5599
+
+###############
+<https://pasdenom.info/nocem.en.html>
+###############
+
+Ceci est une notice basÃ©e sur spamassassin.
+Le(s) message(s) indiquÃ©(s) aprÃ¨s NCM BODY est/sont probablement du spam.
+
+En franÃ§ais, vous pouvez rÃ©pondre sur fr.usenet.abus.d
+
+Ce message a Ã©tÃ© signÃ© par la clef :
+8A90 C13A E047 AC73 06BB  2E47 21ED E4D6 D445 5599
+
+
+#################################
+<https://pasdenom.info/nocem.html>
+#################################
+
+
+@@BEGIN NCM HEADERS
+Version: 0.93
+Issuer: robot@pasdenom.info
+Type: spam
+Action: hide
+Count: 1
+Notice-ID: fr.20260215143501.4534
+@@BEGIN NCM BODY
+<10mshq5$1be41$2@news.usenet.ovh> fr.soc.environnement
+@@END NCM BODY
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCAAdFiEEipDBOuBHrHMGuy5HIe3k1tRFVZkFAmmRy4UACgkQIe3k1tRF
+VZmGYAwAtrIcXr0ZAonh44m3yE74XS7EEcFh3SpsamzfvBG0lnT/jclxk1pvysmD
+oLIoDO7n2kzNzv40YYZ0S/zqz3jY8mizfQlBXhSTmldTJ4q5cpl6Sy7OvU94qFO1
+if57kO4b5yEKhrhCRJ3p2PEZ9aJEO95Jc1SZqNjlDGQyPifoUGoZST+ulIRAQMFi
+pIxz/so2BiYLAhKfvdkaaIqf6qqS9rHhWkHWqPIc+M2g27d/bTMyrke16QQjsixw
+znwFeLAe/ZrF8yi75rVUlBcHU7p/Upf5s3zUxMshGBVjbxvtvnsIeanhRHHQJjKG
+NC1TFPy24Pfq+BOSoRE35eBvbR8h1TIrTlyWJFt5B7B2EIyBLn1axF+yHH+aTufW
+ewWhPpyP7BY5bymvHNtqixI5HhuVeSBCfK9sOybrUFY4hPODZV435zmjWYkvuHAo
+vypw5JOpYY01Iy78ZfUGBXcC5kpcxrbJ5NQiaM+R3AqKMn01g3ALFnCiktmV+RRq
+6RLXJnCZ
+=wjn8
+-----END PGP SIGNATURE-----

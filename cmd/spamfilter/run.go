@@ -50,7 +50,7 @@ type runOpts struct {
 	maxMbit                          float64
 	biAll                            bool
 	compress                         bool
-	nocemSkip                        string
+	nocemSkip, nocemSkipIn           string
 	holdOut                          bool
 	useBI                            bool
 	share                            float64
@@ -84,6 +84,7 @@ func run(args []string) error {
 	fs.IntVar(&o.nocemMax, "nocem-max", 150000, "at most this many NoCeM examples when retraining")
 	fs.Float64Var(&o.maxMbit, "max-mbit", 0, "cap the download from the server at this many megabits per second, all connections together (0 = no cap)")
 	fs.StringVar(&o.nocemSkip, "nocem-skip", strings.Join(sf.DefaultNocemSkip, ","), "NoCeM issuers whose listings are ignored (\"\" = none)")
+	fs.StringVar(&o.nocemSkipIn, "nocem-skip-in", strings.Join(sf.DefaultNocemSkipIn, ","), "full and unsure mode: NoCeM issuers ignored in one hierarchy, HIER=ISSUER, comma-separated (\"\" = none)")
 	fs.BoolVar(&o.holdOut, "hold-out-audit", true, "full mode: don't use the labels of spot-checked articles (audit), so the spot checks stay a fair test")
 	fs.BoolVar(&o.useBI, "use-bi", false, "full mode: also flag the copies of the keys the bi command found (as run -mode bi does), unless the article is ham by its label or the local model; use with -bi=false")
 	fs.BoolVar(&o.compress, "compress", true, "COMPRESS DEFLATE (RFC 8054) on every server connection, when the server offers it")
@@ -225,11 +226,18 @@ func run(args []string) error {
 	}
 	log.Printf("run: %d groups in LIST ACTIVE, %d selected by -groups", len(active), len(groups))
 	var nocem sf.IDSet
+	var nocemScoped sf.NocemScoped
 	if (o.mode == "full" || o.mode == "unsure") && o.nocemTypes != "" {
 		if nocem, err = sf.LoadNocemSet(st, splitList(o.nocemTypes)); err != nil {
 			return err
 		}
 		log.Printf("run: %d Message-IDs listed as spam in NoCeM notices (%s)", len(nocem), o.nocemTypes)
+		if nocemScoped, err = sf.LoadNocemScoped(st, splitList(o.nocemTypes), splitList(o.nocemSkipIn)); err != nil {
+			return err
+		}
+		for h, ids := range nocemScoped {
+			log.Printf("run: %d of them ignored in %s.* (-nocem-skip-in)", len(ids), h)
+		}
 	}
 	var verdicts map[string]sf.Verdict
 	var heldOut map[string]bool
@@ -247,7 +255,7 @@ func run(args []string) error {
 		}
 		log.Printf("run: %d labels decide their keys first (%d spot-checked keys held out)", len(verdicts), len(heldOut))
 	}
-	r := &runner{o: o, c: c, verdicts: verdicts, heldOut: heldOut, limit: limit, biChunks: biChunks, ov: ov, st: st, lab: lab, model: m, match: match, biw: biw, biKeys: biKeys, nocem: nocem, cw: cw,
+	r := &runner{o: o, c: c, verdicts: verdicts, heldOut: heldOut, limit: limit, biChunks: biChunks, ov: ov, st: st, lab: lab, model: m, match: match, biw: biw, biKeys: biKeys, nocem: nocem, nocemScoped: nocemScoped, cw: cw,
 		rng: rand.New(rand.NewPCG(o.seed, o.seed^0x2545f4914f6cdd1d)), rules: sf.DefaultRules}
 	switch o.mode {
 	case "sample":
@@ -276,22 +284,23 @@ func run(args []string) error {
 }
 
 type runner struct {
-	o        runOpts
-	c        *sf.NNTP
-	ov       *sf.Overview
-	st       *sf.Store
-	lab      *labeler
-	model    *sf.Model
-	match    func(string) bool
-	rng      *rand.Rand
-	rules    sf.Rules
-	biw      *sf.BIWriter          // full mode: Breidbart counts, pass 1
-	biKeys   map[uint64]float32    // bi mode: keys at or above the threshold
-	biChunks map[uint32]bool       // bi mode: the chunks holding their copies (nil = read all)
-	nocem    sf.IDSet              // full mode: Message-IDs NoCeM issuers listed as spam
-	cw       *sf.CandWriter        // unsure mode: where the candidates go
-	verdicts map[string]sf.Verdict // full mode: the API labels (spam, ham) by key, read-only during the scan
-	heldOut  map[string]bool       // keys of spot-checked articles: their labels are not used
+	o           runOpts
+	c           *sf.NNTP
+	ov          *sf.Overview
+	st          *sf.Store
+	lab         *labeler
+	model       *sf.Model
+	match       func(string) bool
+	rng         *rand.Rand
+	rules       sf.Rules
+	biw         *sf.BIWriter          // full mode: Breidbart counts, pass 1
+	biKeys      map[uint64]float32    // bi mode: keys at or above the threshold
+	biChunks    map[uint32]bool       // bi mode: the chunks holding their copies (nil = read all)
+	nocem       sf.IDSet              // full mode: Message-IDs NoCeM issuers listed as spam
+	nocemScoped sf.NocemScoped        // listings ignored in one hierarchy (-nocem-skip-in)
+	cw          *sf.CandWriter        // unsure mode: where the candidates go
+	verdicts    map[string]sf.Verdict // full mode: the API labels (spam, ham) by key, read-only during the scan
+	heldOut     map[string]bool       // keys of spot-checked articles: their labels are not used
 	// mu serializes what follows the scoring of a chunk (database writes,
 	// API labels, Breidbart counts, totals, retraining) when several
 	// connections scan at once
@@ -587,11 +596,12 @@ func (r *runner) commitChunk(ctx context.Context, group string, a0, b int64, res
 
 // judgement is what the full scan decides an article by.
 type judgement struct {
-	verdict func(key string) (sf.Verdict, bool) // labels of the model API (nil = none)
-	nocem   func(msgid string) bool
-	rules   sf.Rules
-	model   *sf.Model
-	bi      func(a sf.Article) (float32, bool) // Breidbart index at or above the threshold (nil = none)
+	verdict      func(key string) (sf.Verdict, bool) // labels of the model API (nil = none)
+	nocem        func(msgid string) bool
+	nocemIgnored func(a sf.Article) bool // a listing ignored where a was posted (nil = none)
+	rules        sf.Rules
+	model        *sf.Model
+	bi           func(a sf.Article) (float32, bool) // Breidbart index at or above the threshold (nil = none)
 }
 
 // judge decides one article: a label of the model API (it saw more than
@@ -606,7 +616,7 @@ func (j judgement) judge(a sf.Article) (label, stage, reason string) {
 			return v.Label, v.Stage, v.Reason
 		}
 	}
-	if j.nocem != nil && j.nocem(a.MsgID) {
+	if j.nocem != nil && j.nocem(a.MsgID) && (j.nocemIgnored == nil || !j.nocemIgnored(a)) {
 		return sf.Spam, sf.StageNocem, "nocem"
 	}
 	if v, ok := j.rules.Decide(a, 0); ok {
@@ -629,6 +639,9 @@ func judge(a sf.Article, nocem func(msgid string) bool, rules sf.Rules, m *sf.Mo
 // judgement returns the scan's judgement with the current model.
 func (r *runner) judgement(m *sf.Model) judgement {
 	j := judgement{nocem: r.nocemHas, rules: r.rules, model: m}
+	if len(r.nocemScoped) > 0 {
+		j.nocemIgnored = r.nocemScoped.Skip
+	}
 	if r.verdicts != nil {
 		j.verdict = func(k string) (sf.Verdict, bool) { v, ok := r.verdicts[k]; return v, ok }
 	}

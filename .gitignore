@@ -1,4 +1,6 @@
-/spamfilter
+# binaries (go build -o bin/...); the old default output landed in spamfilter/
+/bin/
+/spamfilter/spamfilter
 /spamfilter-*
 *.db
 *.db-wal

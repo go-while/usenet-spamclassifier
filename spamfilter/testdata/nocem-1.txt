@@ -1,0 +1,225 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+
+These articles appeared to be off-topic to the 'bot, who posts these notices as
+a convenience to the Usenet readers, who may choose to mark these articles as
+"already read". You can find the software to process these notices with some
+newsreaders at CancelMoose's[tm] WWW site: http://www.cm.org.
+
+Poster breakdown, culled from the From: headers, with byte counts:
+  2 23246  "J. Campbell" <jac@premiernet.net>
+  1  1845  Joe <COMPANY.CAR@worldnet.att.net>
+  5  3697  LALFIFTH@gnn.com (LindaAnn)
+  2  5194  Little Princess <princess@styx.ios.com>
+  1  1174  Michael Rudnin <mrudnin@shiva.Hunter.CUNY.EDU>
+  1   676  Selly@juno.com (Selly)|forged from att.net
+  1   872  TIFFANY <futrvisn@wwinternet.net>
+  2  4047  Tom Smith <vista5@ix.netcom.com>
+  1 85280  Warfire <warfire@voicenet.com>
+  1  1481  couponguy@aol.com
+  1  1259  darryl@mailmasher.com (Darryl K.)
+  1  1047  gulati@clark.net (NETDATA Intl Inc)
+  1  1420  haze@earthlink.net
+  1  1052  jpleasants <jpleasants@pacs02.infoave.net>
+  1  1005  lgi@sefl.satelnet.org
+  1  1957  marcus51@sover.net
+  1  2088  mbw1@ix.netcom.com (Michael)
+  4  3420  rainbow@agora.rdrop.com ()
+  2  7173  sales@easyway.net (Peter Huang)
+  1   555  toblade@inch.com (Michael)
+  1   656  user@psam.softnet.co.uk
+  1   658  vsall@cybernex.net
+  (149802 bytes total)
+
+The 'bot does not e-mail these posters and is not affiliated with the several
+people who choose to do so.
+
+@@BEGIN NCM HEADERS
+Version: 0.93
+Issuer: nyc.singles-NoCeMbot@bwalk.dm.com
+Type: off-topic
+Newsgroup: nyc.singles
+Action: hide
+Count: 33
+Notice-ID: nsncm1996333161929
+@@BEGIN NCM BODY
+<328C2055.4F48@wwinternet.net>	atl.singles
+	austin.personals
+	av.personals
+	ba.personals
+	ba.singles
+	chi.personals
+	dfw.singles
+	houston.personals
+	houston.singles
+	la.personals
+	ne.singles
+	niagara.personals
+	nv.personals
+	nyc.personals
+	nyc.singles
+	ont.singles
+	ott.singles
+	pdx.singles
+	pgh.singles
+	pnw.singles
+	sat.personals
+	sdnet.singles
+	triangle.personals
+	triangle.personals.m-seeking-w
+	uk.singles
+	vegas.personals
+<rainbow.848012948@agora.rdrop.com>	la.personals
+	nyc.singles
+	nyc.personals
+	austin.personals
+<rainbow.848012843@agora.rdrop.com>	la.personals
+	nyc.singles
+	nyc.personals
+	austin.personals
+<56h2ob$6ni@clarknet.clark.net>	nyc.singles
+<toblade-1511962328420001@port132.dialup.inch.com>	nyc.singles
+<56oi9s$d85@mtinsc01-mgt.ops.worldnet.att.net>	nyc.singles
+<56nicq$cp4@news-e2c.gnn.com>	nyc.singles
+<56nj7o$ctv@news-e2c.gnn.com>	nyc.singles
+<56sb9h$6u3@news-c1.gnn.com>	nyc.singles
+<56vsr7$bia@dfw-ixnews11.ix.netcom.com>	nyc.singles
+<Pine.SOL.3.91.961121002216.3670C-100000@shiva.hunter.cuny.edu>	nyc.personals
+	nyc.singles
+	alt.love
+<3293e4f0.3733357@news2.new-york.net>	nyc.singles
+<3293D527.2BCD@pacs02.infoave.net>	alt.personals
+	alt.singles
+	az.teen
+	austin.personals
+	ba.personals
+	alt.general
+	nyc.singles
+	arcadia.chat
+	vegas.singles
+	us.sc.charleston.personals
+	us.sc.chester.personals
+	us.sc.columbia.personals
+	us.sc.rockhill.personals
+	vegas.personals
+<19961123004500.TAA11974@ladder01.news.aol.com>	nyc.singles
+<Pine.BSI.3.91.961122195458.16995A-100000@granite.sover.net>	nyc.personals
+	nyc.singles
+<575b65$ic3@taz.interpoint.net>	announce.singles
+	atl.singles
+	aus.personals
+	austin.personals
+	ba.personals
+	ba.singles
+	chi.personals
+	dfw.personals
+	dfw.singles
+	eug.personals
+	houston.personals
+	isreal.ads.personals
+	ithaca.personals
+	jobs.singles
+	la.personals
+	md.personals
+	milw.personals
+	ne.personals
+	nevada.personals
+	nevada.singles
+	niagara.personals
+	nv.personals
+	nv.singles
+	nyc.personals
+	nyc.singles
+<N.112496.164100.80@a66.modem.planet.internet.co.uk>	alt.personals
+	alt.personals.ads
+	alt.personals.jewish
+	alt.personals.misc
+	alt.sex.stories
+	nyc.personals
+	nyc.singles
+	soc.penpals
+<3298FC88.60E2@worldnet.att.net>	nyc.singles
+<57crod$7ki@fiji.easyway.net>	nj.forsale
+	ny.forsale
+	ny.general
+	ny.wanted
+	nyc.announce
+	nyc.general
+	nyc.singles
+	nyc.jobs.offered
+	nj.market.computers
+	nj.market.misc
+	nj.misc
+	nj.wanted
+	alt.online-service
+	alt.online-service.microsoft
+	alt.online-service.prodigy
+	alt.online-service.compuserve
+	alt.online-service.america-online
+	alt.online-service.delphi
+	alt.online-service.genie
+	biz.marketplace
+	biz.marketplace.computers.
+<57crrg$7ki@fiji.easyway.net>	nj.forsale
+	ny.forsale
+	ny.general
+	ny.wanted
+	nyc.announce
+	nyc.general
+	nyc.singles
+	nyc.jobs.offered
+	nj.market.computers
+	nj.market.misc
+	nj.misc
+	nj.wanted
+	alt.online-service
+	alt.online-service.microsoft
+	alt.online-service.prodigy
+	alt.online-service.compuserve
+	alt.online-service.america-online
+	alt.online-service.delphi
+	alt.online-service.genie
+	biz.marketplace
+	biz.marketplace.computers.
+<32993124.17C7@earthlink.net>	nyc.personals
+	nyc.singles
+<57f1c9$f2q@dfw-ixnews6.ix.netcom.com>	nyc.singles
+<rainbow.849032416@agora.rdrop.com>	alt.personals.ads
+	alt.personals.misc
+	nyc.singles
+	nyc.personals
+<rainbow.849032570@agora.rdrop.com>	alt.personals.ads
+	alt.personals.misc
+	nyc.singles
+	nyc.personals
+<57doal$n92@dfw-ixnews2.ix.netcom.com>	nyc.personals
+	nyc.singles
+<329A8740.26FD@premiernet.net>	nyc.singles
+<329A87A1.353D@premiernet.net>	nyc.singles
+<57houm$r7g@news-e2c.gnn.com>	nyc.singles
+<57hpe9$r9p@news-e2c.gnn.com>	nyc.singles
+<329CB4FB.5C2@styx.ios.com>	nyc.singles
+<329CB4FB.5C2@styx.ios.com>	nyc.singles
+<329CA7B7.4104@voicenet.com>	nyc.singles
+	atl.singles
+	alt.paranormal
+	alt.prophecies.nostradamus
+	alt.bible.prophecy
+	alt.paranet.science
+	alt.prophecies.cayce
+<32b4c593.2575029@nntp.ix.netcom.com>	nyc.singles
+@@END NCM BODY
+
+Feel free to e-mail the 'bot for a copy of its PGP public key or to comment on
+its criteria for finding off-topic articles. All e-mail will be read by humans.
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6
+
+iQCVAwUBMp8NFOmKVEDt7bQVAQGvOAQA0EIsx6S7zBfDDW0EGGuK1uPJzIEFFngv
+l7niMpM9brRQlIzLJeeWYBj/Cs8G+v5QeR5fPypYMRtFTXFaC5LdLR9UisRpA04w
+N2sGSLYMqRRuOaylvlmVFwQT3Ek7MM9TGCle52PpEsKoZvPRxImnAjL94l48FzLV
+c+igMR2S4MY=
+=QU54
+-----END PGP SIGNATURE-----
+
